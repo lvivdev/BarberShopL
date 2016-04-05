@@ -39,9 +39,9 @@
 		<label>Ваш парикмахер:</label>
 		<select name="barber" class="form-control">
 			<option value="Anybody">Не важно</option>
-			<option value="Walter">Walter White</option>
-			<option value="Jessie">Jessie Pinkman</option>
-			<option value="Gus">Gus Fring</option>
+			<option value="Walter"<%= @barber == 'Walter' ? 'selected' : '' %>>Walter White</option>
+			<option value="Jessie"<%= @barber == 'Jessie' ? 'selected' : '' %>>Jessie Pinkman</option>
+			<option value="Gus"<%= @barber == 'Gus' ? 'selected' : '' %>>Gus Fring</option>
 		</select>
 	</div> <br /><br /><br />
 
