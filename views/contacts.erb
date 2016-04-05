@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Barber Shop</title>
+</head>
+<body>
+<h2>Обратная связь</h2>
+
+<form action="/contacts" method="POST" role="form">
+
+	<div class="form-group">
+		<label>Ваше имя</label>
+		<input name="name" type="text" class="form-control" placeholder="Имя" value="<%=@name%>">
+	</div>
+
+	<div class="form-group">
+		<label>Ваша электронная почта</label>
+		<input name="mail" type="text" class="form-control" placeholder="Электропочта" value="<%=@mail%>">
+	</div>
+
+	<div class="form-group">
+		<label>Введите сообщение</label>
+		<textarea name="message" type="text" class="form-control" placeholder="Ваше сообщение" rows="6"><%=@message%></textarea>
+	</div>
+
+	<button type="submit" class="btn btn-primary">Отправить нам</button>
+</form>
+
+
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Barber Shop</title>
+
+</head>
+<body>
+<h2>Записаться на стрижку</h2>
+
+<script type="text/javascript">
+	$(function(){
+		$('#color').simplecolorpicker();
+	})
+</script>
+
+<form action='/visit' method="POST" role="form">
+	
+	<div class="form-group">
+		<label>Ваше имя</label>
+		<input name="user" type="text" class="form-control" placeholder="Имя" value="<%=@user%>">
+	</div>
+
+	<div class="form-group">
+		<label>Ваша почта</label>
+		<input name="usermail" type="text" class="form-control" placeholder="Почта" value="<%=@usermail%>">
+	</div>
+
+	<div class="form-group">
+		<label>Ваш телефон</label>
+		<input name="userphone" type="text" class="form-control" placeholder="Телефон" value="<%=@userphone%>">
+	</div>
+
+	<div class="form-group">
+		<label>Введите дату и время</label>
+		<input name="date_time" type="text" class="form-control" placeholder="dd/mm - hh/mm" value="<%=@date_time%>">
+	</div>
+
+	<div class="form-group">
+		<label>Ваш парикмахер:</label>
+		<select name="barber" class="form-control">
+			<option value="Anybody">Не важно</option>
+			<option value="Walter">Walter White</option>
+			<option value="Jessie">Jessie Pinkman</option>
+			<option value="Gus">Gus Fring</option>
+		</select>
+	</div> <br /><br /><br />
+
+	<div class="form-group">
+		<label>Какой цвет вам к лицу:</label>
+		<select id="color" name="color">
+			<option value="#7bd148">Green</option>
+			<option value="#5484ed">Bold blue</option>
+			<option value="#a4bdfc">Blue</option>
+			<option value="#46d6db">Turquoise</option>
+			<option value="#7ae7bf">Light green</option>
+			<option value="#51b749">Bold green</option>
+			<option value="#fbd75b">Yellow</option>
+			<option value="#ffb878">Orange</option>
+			<option value="#ff887c">Red</option>
+			<option value="#dc2127">Bold red</option>
+			<option value="#dbadff">Purple</option>
+			<option value="#e1e1e1">Gray</option>
+		</select>
+
+	</div>
+
+	<button type="submit" class="btn btn-primary">Записаться</button>
+
+</form>
+
+
+</body>
+</html>
