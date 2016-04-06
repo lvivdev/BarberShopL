@@ -143,7 +143,7 @@ post '/contacts' do
 	:from => params[:name],
     :to => 'klrealty.rs@gmail.com',
     :subject => params[:name] + " has contacted you via the Website",
-    :body => "Сообщение: " + " " + params[:message] + " " + " Почта: " + params[:mail],
+    :body => "Имя: " + params[:name] + " Сообщение: " + params[:message] + " Почта: " + params[:mail],
     :via => :smtp,
     :via_options => {
      :address              => 'smtp.gmail.com',
