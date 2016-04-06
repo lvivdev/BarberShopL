@@ -10,6 +10,20 @@ configure do
   enable :sessions
 end
 
+configure do
+	@db = SQLite3::Database.new 'barbershop.db'
+	@db.execute 'CREATE TABLE IF NOT EXISTS 
+	"Users"
+	(
+		"id" INTEGER PRIMARY KEY AUTOINCREMENT,
+		"username" TEXT,
+		"phone" TEXT,
+		"date_stamp" TEXT,
+		"barber" TEXT,
+		"color" TEXT
+	)'
+end
+
 helpers do
   def username
     session[:identity] ? session[:identity] : "#{@username}"
