@@ -11,14 +11,15 @@ configure do
 end
 
 configure do
-	db = SQLite3::Database.new 'barbershop.db'
-	db.execute 'CREATE TABLE IF NOT EXISTS 
-	"Users"
+	@db = SQLite3::Database.new 'barbershop.db'
+	@db.execute 'CREATE TABLE IF NOT EXISTS
+	"Users" 
 	(
 		"id" INTEGER PRIMARY KEY AUTOINCREMENT,
-		"username" TEXT,
-		"phone" TEXT,
-		"date_stamp" TEXT,
+		"user" TEXT,
+		"usermail" TEXT,
+		"userphone" TEXT,
+		"date_time" TEXT,
 		"barber" TEXT,
 		"color" TEXT
 	)'
@@ -74,17 +75,19 @@ post '/visit' do
 	@barber = params[:barber]
 	@color = params[:color]
 
-	db = get_db
-	db.execute 'insert into
+	@db = get_db
+	@db.execute "INSERT INTO
 				Users
 				(
-					username,
-					phone,
-					date_stamp
+					user,
+					usermail,
+					userphone,
+					date_time,
 					barber,
 					color
 				)
-				values (?, ?, ?, ?, ?)', [@user, @userphone, @date_time, @barber, @color]
+				values ( ?, ?, ?, ?, ?, ? )",
+				[@user, @userphone, @date_time, @barber, @color]
 
 
 	#create hash
@@ -101,28 +104,6 @@ post '/visit' do
 		return erb :visit		
 	end
 
-
-	f = File.open './public/users.txt', 'a'
-	f.write "Barber: #{@barber} for User: #{@user}, Mail: #{@usermail}, Phone: #{@userphone}, Date and time: #{@date_time}, Цвет стрижки: #{@color}"
-	f.close
-
-
-	Pony.mail({
-	:from => params[:user],
-    :to => 'klrealty.rs@gmail.com',
-    :subject => params[:user] + " has contacted you via the Website",
-    :body => "Name: " + params[:user] + " " + "Mail: " + params[:usermail] + " " +  "Phone: " + params[:userphone] + " " +  "Date and time: " + params[:date_time] + " " +  "Barber: " + params[:barber] + " " +  "Color: " + params[:color],
-    :via => :smtp,
-    :via_options => {
-     :address              => 'smtp.gmail.com',
-     :port                 => '587',
-     :enable_starttls_auto => true,
-     :user_name            => 'klrealty.rs@gmail.com',
-     :password             => '81caeb71a2019fbb7ada016b85d040de',
-     :authentication       => :login, 
-     :domain               => "localhost.localdomain" 
-     }
-    })
     redirect '/success' 
 end
 
