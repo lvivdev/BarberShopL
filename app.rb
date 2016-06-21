@@ -11,8 +11,8 @@ configure do
 end
 
 configure do
-	@db = SQLite3::Database.new 'barbershop.db'
-	@db.execute 'CREATE TABLE IF NOT EXISTS 
+	db = SQLite3::Database.new 'barbershop.db'
+	db.execute 'CREATE TABLE IF NOT EXISTS 
 	"Users"
 	(
 		"id" INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -74,6 +74,19 @@ post '/visit' do
 	@barber = params[:barber]
 	@color = params[:color]
 
+	db = get_db
+	db.execute 'insert into
+				Users
+				(
+					username,
+					phone,
+					date_stamp
+					barber,
+					color
+				)
+				values (?, ?, ?, ?, ?)', [@user, @userphone, @date_time, @barber, @color]
+
+
 	#create hash
 	hh = {
 		:user => 'Введите имя',
@@ -88,9 +101,11 @@ post '/visit' do
 		return erb :visit		
 	end
 
+
 	f = File.open './public/users.txt', 'a'
 	f.write "Barber: #{@barber} for User: #{@user}, Mail: #{@usermail}, Phone: #{@userphone}, Date and time: #{@date_time}, Цвет стрижки: #{@color}"
 	f.close
+
 
 	Pony.mail({
 	:from => params[:user],
@@ -110,6 +125,15 @@ post '/visit' do
     })
     redirect '/success' 
 end
+
+get('/success') do
+	erb "Спасибо за обращение!"
+end
+
+def get_db
+	return SQLite3::Database.new 'barbershop.db'		
+end
+
 
 get '/contacts' do
 	erb :contacts, :layout => :layout
@@ -156,10 +180,6 @@ post '/contacts' do
      }
     })
     redirect '/success' 
-end
-
-get('/success') do
-	erb "Спасибо за обращение!"
 end
 
 get '/logout' do
