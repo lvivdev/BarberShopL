@@ -87,7 +87,7 @@ post '/visit' do
 					color
 				)
 				values ( ?, ?, ?, ?, ?, ? )",
-				[@user, @userphone, @date_time, @barber, @color]
+				[@user, @usermail, @userphone, @date_time, @barber, @color]
 
 
 	#create hash
@@ -103,6 +103,23 @@ post '/visit' do
 	if @error != ''
 		return erb :visit		
 	end
+
+	Pony.mail({
+	:from => params[:user],
+    :to => 'klrealty.rs@gmail.com',
+    :subject => params[:user] + " has contacted you via the Website",
+    :body => "Name: " + params[:user] + " " + "Mail: " + params[:usermail] + " " +  "Phone: " + params[:userphone] + " " +  "Date and time: " + params[:date_time] + " " +  "Barber: " + params[:barber] + " " +  "Color: " + params[:color],
+    :via => :smtp,
+    :via_options => {
+     :address              => 'smtp.gmail.com',
+     :port                 => '587',
+     :enable_starttls_auto => true,
+     :user_name            => 'klrealty.rs@gmail.com',
+     :password             => '81caeb71a2019fbb7ada016b85d040de',
+     :authentication       => :login, 
+     :domain               => "localhost.localdomain" 
+     }
+    })
 
     redirect '/success' 
 end
