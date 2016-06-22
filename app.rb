@@ -128,11 +128,6 @@ get('/success') do
 	erb "Спасибо за обращение!"
 end
 
-def get_db
-	return SQLite3::Database.new 'barbershop.db'		
-end
-
-
 get '/contacts' do
 	erb :contacts, :layout => :layout
 end
@@ -185,5 +180,11 @@ get '/logout' do
   erb "<div class='alert alert-message'>Logged out</div>"
 end
 
+get '/showusers' do
+  erb "Hello World"
+end
 
+def get_db
+	return SQLite3::Database.new 'barbershop.db'
+end
 

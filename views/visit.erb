@@ -10,7 +10,8 @@
 <script type="text/javascript">
 	$(function(){
 		$('#color').simplecolorpicker();
-	})
+		$('#datetimepicker').datetimepicker();
+	});
 </script>
 
 <form action='/visit' method="POST" role="form">
@@ -32,7 +33,7 @@
 
 	<div class="form-group">
 		<label>Введите дату и время</label>
-		<input name="date_time" type="text" class="form-control" placeholder="dd/mm - hh/mm" value="<%=@date_time%>">
+		<input id="datetimepicker" name="date_time" type="text" class="form-control" placeholder="dd/mm - hh/mm" value="<%=@date_time%>">
 	</div>
 
 	<div class="form-group">
