@@ -181,8 +181,12 @@ get '/logout' do
 end
 
 get '/showusers' do
-  erb "Hello World"
+	erb :showusers
 end
+
+post '/showusers' do
+
+end	
 
 def get_db
 	db = SQLite3::Database.new 'barbershop.db'
