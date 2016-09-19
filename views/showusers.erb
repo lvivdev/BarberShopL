@@ -4,23 +4,25 @@
 	<title>Barber Shop</title>
 </head>
 <body>
+
+<%= @results %>
+
 <table class="table">
-<tr>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
+
+	<% @results.each do |row| %>
+		<tr>
+			<td><%= row['user'] %></td>
+			<td><%= row['usermail'] %></td>
+			<td><%= row['userphone'] %></td>
+			<td><%= row['date_time'] %></td>
+			<td><%= row['barber'] %></td>
+			<td><%= row['color'] %></td>
+
+		</tr>
+	<% end %>
+
 </table>
+
 </body>
 </html>
 
