@@ -5,10 +5,19 @@
 </head>
 <body>
 
-<%= @results %>
+<table class="table table-bordered">
 
-<table class="table">
-
+	<thead>
+		<tr>
+			<th>Имя</th>
+			<th>Почта</th>
+			<th>Телефон</th>
+			<th>Время</th>
+			<th>Парикмахер</th>
+			<th>Цвет</th>	
+		</tr>
+	</thead>	
+	<body>
 	<% @results.each do |row| %>
 		<tr>
 			<td><%= row['user'] %></td>
@@ -20,6 +29,7 @@
 
 		</tr>
 	<% end %>
+	</body>
 
 </table>
 

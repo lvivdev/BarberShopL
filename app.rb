@@ -120,8 +120,7 @@ post '/visit' do
      :domain               => "localhost.localdomain" 
      }
     })
-
-    redirect '/success' 
+	redirect '/success'
 end
 
 get('/success') do
