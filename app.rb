@@ -5,6 +5,24 @@ require 'sinatra/reloader'
 require 'pony'
 require 'sqlite3'
 
+def is_barber_exists? db, name
+	db.execute('select * from Barbers where name=?', [name]).length > 0
+end
+
+def seed_db db, barbers
+	
+	barbers.each do |barber|
+		if !is_barber_exists? db, barber
+			db.execute 'insert into Barbers (name) values (?)', [barber]
+		end
+	end
+
+end
+
+before do
+	db = get_db
+	@barbers = db.execute 'select * from Barbers'
+end
 
 configure do
   enable :sessions
@@ -23,6 +41,15 @@ configure do
 		"barber" TEXT,
 		"color" TEXT
 	)'
+
+	@db.execute 'CREATE TABLE IF NOT EXISTS
+	"Barbers" 
+	(
+		"id" INTEGER PRIMARY KEY AUTOINCREMENT,
+		"name" TEXT
+	)'
+
+	seed_db @db, ['Walter White', 'Jessie Pinkman', 'Gus Fring', 'Mike']
 end
 
 helpers do
@@ -89,7 +116,8 @@ post '/visit' do
 				values ( ?, ?, ?, ?, ?, ? )",
 				[@user, @usermail, @userphone, @date_time, @barber, @color]
 
-
+	
+	
 	#create hash
 	hh = {
 		:user => 'Введите имя',
@@ -184,9 +212,22 @@ get '/showusers' do
 
 	@results = db.execute 'select * from Users order by id desc'
 	erb :showusers
+
 end
 
 post '/showusers' do
+
+end
+
+get '/barbers' do
+	db = get_db
+
+	@barbername = db.execute 'select * from Barbers order by id desc'
+	erb :barbers
+
+end
+
+post '/barbers' do
 
 end	
 

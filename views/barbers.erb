@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Barber Shop</title>
+</head>
+<body>
+
+<table class="table table-bordered">
+
+	<thead>
+		<tr>
+			<th>Имя</th>
+		</tr>
+	</thead>	
+	<tbody>
+		<% @barbername.each do |row| %>
+			<tr>
+				<td><%= row['name'] %></td>
+			</tr>
+		<% end %>
+	</tbody>
+
+</table>
+
+</body>
+</html>
+

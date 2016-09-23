@@ -17,19 +17,18 @@
 			<th>Цвет</th>	
 		</tr>
 	</thead>	
-	<body>
-	<% @results.each do |row| %>
-		<tr>
-			<td><%= row['user'] %></td>
-			<td><%= row['usermail'] %></td>
-			<td><%= row['userphone'] %></td>
-			<td><%= row['date_time'] %></td>
-			<td><%= row['barber'] %></td>
-			<td><%= row['color'] %></td>
-
-		</tr>
-	<% end %>
-	</body>
+	<tbody>
+		<% @results.each do |row| %>
+			<tr>
+				<td><%= row['user'] %></td>
+				<td><%= row['usermail'] %></td>
+				<td><%= row['userphone'] %></td>
+				<td><%= row['date_time'] %></td>
+				<td><%= row['barber'] %></td>
+				<td><%= row['color'] %></td>
+			</tr>
+		<% end %>
+	</tbody>
 
 </table>
 
